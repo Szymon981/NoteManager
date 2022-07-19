@@ -1,0 +1,49 @@
+.modal{
+  max-width: 550px;
+}
+
+.data-input{
+  padding-bottom: 10px;
+}
+
+.data-input-label{
+  display: block;
+}
+
+.modal__edit-title{
+  width: 550px;
+  text-align: center;
+}
+
+.modal__edit-body{
+  width: 550px;
+}
+
+.modal .action-button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Raleway";
+  font-size: 15px;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 65px;
+  float: right;
+}
+
+.modal .action-button-div{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.modal__header{
+  text-align: center;
+}
+

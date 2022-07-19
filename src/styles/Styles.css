@@ -1,0 +1,68 @@
+#App {
+  text-align: center;
+  font-family: "Century Gothic";
+  color: navajowhite;
+}
+
+#App-header {
+  background-color: #42275a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+#header-title{
+  font-family: 'Signika';
+  font-size: 100px;
+  margin-bottom: 45px;
+}
+
+#notes-div{
+  margin-bottom: 5px;
+}
+
+.added-note-container{
+  margin-bottom: 20px;
+}
+
+#note-add-header{
+  margin: 10px;
+}
+
+#note-edit-title{
+  width: 550px;
+  text-align: center;
+}
+
+#note-edit-body{
+  width: 550px;
+}
+
+#note-title{
+  margin: 5px;
+}
+
+.action-button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Raleway";
+  font-size: 15px;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 65px;
+}
+
+.add-note-label-class{
+  display: block;
+}
