@@ -47,20 +47,20 @@ export const NoteEditPopup = (props) => {
         <div className="modal">
           <ActionButton
             name="Zamknij"
+            position="right"
             onClickHandler={closeModal}
           ></ActionButton>
           <h2 className="modal__edit-title">{props.title}</h2>
           <form>
-            <div>
-              <ContentEditable
-                innerRef={contentEditable}
-                onChange={handleNoteChange}
-                html={props.body}
-                className="modal__edit-body"
-              />
-            </div>
+            <ContentEditable
+              innerRef={contentEditable}
+              onChange={handleNoteChange}
+              html={props.body}
+              className="content-editable"
+            />
             <ActionButton
               name="Zapisz"
+              position="right"
               onClickHandler={saveNoteChange}
             ></ActionButton>
           </form>

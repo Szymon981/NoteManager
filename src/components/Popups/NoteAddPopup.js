@@ -7,7 +7,11 @@ import { saveNewNote } from "../../api/ApiConnections";
 import { NoteAddInput } from "./NoteAddInput";
 import { NoteAddTextarea } from "./NoteAddTextarea";
 import { ActionButton } from "../ActionButton/ActionButton";
+import { DataInsert } from "./DataInsert";
 Modal.setAppElement("body");
+
+const InputComponent = DataInsert(NoteAddInput);
+const TextAreaComponent = DataInsert(NoteAddTextarea);
 
 export const NoteAddPopup = (props) => {
   const [noteTitle, setNoteTitle] = useState("");
@@ -22,18 +26,6 @@ export const NoteAddPopup = (props) => {
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
-  }, []);
-
-  const noteTitleChange = useCallback((evt) => {
-    setNoteTitle(evt.target.value);
-  }, []);
-
-  const noteBodyChange = useCallback((evt) => {
-    setNoteBody(evt.target.value);
-  }, []);
-
-  const noteTagChange = useCallback((evt) => {
-    setNoteTag(evt.target.value);
   }, []);
 
   const notesSetter = useCallback(
@@ -69,32 +61,34 @@ export const NoteAddPopup = (props) => {
         contentLabel="Note adding modal"
       >
         <div className="modal">
-          <div className="action-button-div">
+          <div>
             <ActionButton
               name="Zamknij"
+              position="right"
               onClickHandler={closeModal}
             ></ActionButton>
           </div>
           <form>
             <h2 className="modal__header">Tworzenie nowej notatki</h2>
-            <NoteAddInput
-              title="Podaj tytuł notatki:"
+            <InputComponent
+              title="Podaj tytuł notatki"
               value={noteTitle}
-              handleChange={noteTitleChange}
-            ></NoteAddInput>
-            <NoteAddTextarea
-              title="Podaj treść notatki:"
+              handleChange={setNoteTitle}
+            />
+            <TextAreaComponent
+              title="Podaj treść notatki"
               value={noteBody}
-              handleChange={noteBodyChange}
-            ></NoteAddTextarea>
-            <NoteAddInput
-              title="Podaj tag notatki:"
+              handleChange={setNoteBody}
+            />
+            <InputComponent
+              title="Podaj tag notatki"
               value={noteTag}
-              handleChange={noteTagChange}
-            ></NoteAddInput>
+              handleChange={setNoteTag}
+            />
           </form>
           <ActionButton
             name="Zapisz"
+            position="right"
             onClickHandler={handleSave}
           ></ActionButton>
         </div>

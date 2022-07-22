@@ -1,11 +1,14 @@
-.board{
+.board {
   margin-bottom: 5px;
 }
-
-.board__note-add-header{
+.board__tags-filter {
+  margin-bottom: 20px;
+}
+.board__note-add-header {
   margin: 10px;
 }
-
-.board__notes-title{
-  margin: 0px;
+.board__notes-title {
+  margin: 0;
 }
+
+/*# sourceMappingURL=Board.styles.css.map */

@@ -12,10 +12,6 @@ export const Note = (props) => {
     [props]
   );
 
-  // const handleDelete = (id, notesSetter) => {
-  //   deleteNote(id, notesSetter);
-  // };
-
   const handleDelete = useCallback(() => {
     if (
       window.confirm("Czy napewno chcesz usunąć notatkę: " + props.title + "?")
@@ -27,15 +23,12 @@ export const Note = (props) => {
   return (
     <div className="note" key={props.id}>
       <p className="note__title">{props.title}</p>
-      <NoteEditPopup
-        tags={props.tags}
-        fav={props.fav}
-        body={props.body}
-        title={props.title}
-        id={props.id}
-        key={props.id}
-      ></NoteEditPopup>
-      <ActionButton name="Usuń" onClickHandler={handleDelete}></ActionButton>
+      <NoteEditPopup {...props}></NoteEditPopup>
+      <ActionButton
+        name="Usuń"
+        color={"palevioletred"}
+        onClickHandler={handleDelete}
+      ></ActionButton>
     </div>
   );
 };

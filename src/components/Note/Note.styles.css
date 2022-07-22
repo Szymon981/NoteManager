@@ -1,7 +1,12 @@
-.note{
+.note {
+  border: thin solid white;
   margin-bottom: 20px;
+  padding-bottom: 10px;
+  margin-left: 20px;
+  width: 400px;
 }
-
-.note__title{
+.note__title {
   margin: 5px;
 }
+
+/*# sourceMappingURL=Note.styles.css.map */

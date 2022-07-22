@@ -1,18 +1,23 @@
 .action-button {
-    background-color: #fff;
-    border: 1px solid #d5d9d9;
-    border-radius: 8px;
-    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-    box-sizing: border-box;
-    color: #0f1111;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Raleway";
-    font-size: 15px;
-    line-height: 24px;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    word-break: break-all;
-    width: 65px;
+  padding-bottom: 9px;
 }
+.action-button__button {
+  background-color: #ffffff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Raleway";
+  font-size: 15px;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  word-break: break-all;
+  width: 65px;
+}
+
+/*# sourceMappingURL=ActionButton.styles.css.map */

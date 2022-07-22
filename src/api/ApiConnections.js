@@ -28,14 +28,7 @@ export const setAllTags = (setTags) => {
 export const setNotes = (noteSetter) => {
   getAllNotes()
     .then((text) => {
-      // console.log(Object.entries(JSON.parse(text)));
-      // console.log(JSON.parse(text));
-      const notes = Object.entries(JSON.parse(text)).map(([key, value]) => {
-        return value;
-        // console.log(value);
-      });
-      // console.log(notes);
-      noteSetter(notes);
+      noteSetter(JSON.parse(text));
     })
     .catch((error) => console.warn(error));
 };
@@ -55,7 +48,6 @@ export const saveNewNote = (noteTitle, noteBody, noteTags, update) => {
         .then((text) => {
           const notes = Object.entries(JSON.parse(text)).map(([key, value]) => {
             return value;
-            // console.log(value);
           });
           update(notes);
         })
