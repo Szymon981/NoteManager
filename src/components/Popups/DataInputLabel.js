@@ -1,5 +1,5 @@
 import "./Popups.styles.css";
 
-export const DataInputLabel = (props) => {
-  return <label className="data-input-label">{props.title}</label>;
+export const DataInputLabel = ({ title }) => {
+  return <label className="data-input-label">{title}</label>;
 };

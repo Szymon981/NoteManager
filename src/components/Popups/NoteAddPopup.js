@@ -1,22 +1,37 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { customStyles, saveNewNote } from "../../consts/Consts";
 import "./Popups.styles.css";
 import { useCallback } from "react";
-import { customStyles } from "../../consts/Consts";
-import { saveNewNote } from "../../api/ApiConnections";
 import { NoteAddInput } from "./NoteAddInput";
 import { NoteAddTextarea } from "./NoteAddTextarea";
 import { ActionButton } from "../ActionButton/ActionButton";
 import { DataInsert } from "./DataInsert";
+import { useDispatch } from "react-redux";
+import { FavCheckbox } from "../FavCheckbox/FavCheckbox";
 Modal.setAppElement("body");
 
 const InputComponent = DataInsert(NoteAddInput);
 const TextAreaComponent = DataInsert(NoteAddTextarea);
 
-export const NoteAddPopup = (props) => {
+export const NoteAddPopup = () => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");
   const [noteTag, setNoteTag] = useState("");
+  const [noteFav, setNoteFav] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleFavChange = useCallback((evt) => {
+    setNoteFav(evt.target.checked);
+  }, []);
+
+  const resetPopupFields = useCallback(() => {
+    setNoteTitle("");
+    setNoteBody("");
+    setNoteTag("");
+    setNoteFav(false);
+  }, []);
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -26,30 +41,32 @@ export const NoteAddPopup = (props) => {
 
   const closeModal = useCallback(() => {
     setIsOpen(false);
-  }, []);
-
-  const notesSetter = useCallback(
-    (updatedNotes) => {
-      props.notesSetterProps(updatedNotes);
-    },
-    [props]
-  );
-
-  const resetPopupFields = useCallback(() => {
-    setNoteTitle("");
-    setNoteBody("");
-    setNoteTag("");
-  }, []);
+    resetPopupFields();
+  }, [resetPopupFields]);
 
   const handleSave = useCallback(() => {
     if (noteTitle && noteBody && noteTag) {
-      saveNewNote(noteTitle, noteBody, noteTag, notesSetter);
+      dispatch({
+        type: saveNewNote,
+        noteTitle: noteTitle,
+        noteBody: noteBody,
+        noteTags: noteTag,
+        fav: noteFav,
+      });
       closeModal();
       resetPopupFields();
     } else {
       alert("Uzupełnij wszystkie pola");
     }
-  }, [closeModal, noteTitle, noteBody, noteTag, resetPopupFields, notesSetter]);
+  }, [
+    closeModal,
+    noteTitle,
+    noteBody,
+    noteTag,
+    noteFav,
+    resetPopupFields,
+    dispatch,
+  ]);
 
   return (
     <div>
@@ -64,11 +81,11 @@ export const NoteAddPopup = (props) => {
           <div>
             <ActionButton
               name="Zamknij"
-              position="right"
+              float="right"
               onClickHandler={closeModal}
             ></ActionButton>
           </div>
-          <form>
+          <form className="modal__form">
             <h2 className="modal__header">Tworzenie nowej notatki</h2>
             <InputComponent
               title="Podaj tytuł notatki"
@@ -85,10 +102,14 @@ export const NoteAddPopup = (props) => {
               value={noteTag}
               handleChange={setNoteTag}
             />
+            <FavCheckbox
+              isFav={false}
+              handleChange={handleFavChange}
+            ></FavCheckbox>
           </form>
           <ActionButton
             name="Zapisz"
-            position="right"
+            float="right"
             onClickHandler={handleSave}
           ></ActionButton>
         </div>

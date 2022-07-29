@@ -1,31 +1,52 @@
 import React, { useState, useRef } from "react";
 import Modal from "react-modal";
+import { customStyles, updateNote } from "../../consts/Consts";
 import ContentEditable from "react-contenteditable";
 import "./Popups.styles.css";
 import { useCallback } from "react";
-import { customStyles } from "../../consts/Consts";
-import { updateNoteBody } from "../../api/ApiConnections";
 import { ActionButton } from "../ActionButton/ActionButton";
+import { useDispatch } from "react-redux";
+import { FavCheckbox } from "../FavCheckbox/FavCheckbox";
 Modal.setAppElement("body");
 
-export const NoteEditPopup = (props) => {
-  const noteCurrentBody = useRef(props.body);
-  const noteDefaultBody = useRef(props.body);
+export const NoteEditPopup = ({
+  title,
+  body,
+  fav,
+  id,
+  key,
+  width,
+  height,
+  name,
+  position,
+  float,
+}) => {
+  const noteCurrentBody = useRef(body);
+  const noteFav = useRef(fav);
   const contentEditable = useRef();
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const handleNoteChange = useCallback(
+  const dispatch = useDispatch();
+
+  const handleNoteBodyChange = useCallback(
     (evt) => {
       noteCurrentBody.current = evt.target.value;
     },
     [noteCurrentBody]
   );
 
+  const handleNoteFavChange = useCallback((evt) => {
+    noteFav.current = evt.target.checked;
+  }, []);
+
   const saveNoteChange = useCallback(() => {
-    if (noteCurrentBody.current !== noteDefaultBody.current) {
-      updateNoteBody(props.id, noteCurrentBody.current);
-    }
-  }, [props.id]);
+    dispatch({
+      type: updateNote,
+      id: id,
+      body: noteCurrentBody.current,
+      fav: noteFav.current,
+    });
+  }, [id, dispatch]);
 
   const openModal = useCallback(() => {
     setIsOpen(true);
@@ -37,7 +58,15 @@ export const NoteEditPopup = (props) => {
 
   return (
     <div>
-      <ActionButton name="Edytuj" onClickHandler={openModal}></ActionButton>
+      <ActionButton
+        name={name ? name : "Edytuj"}
+        width={width}
+        height={height}
+        onClickHandler={openModal}
+        position={position}
+        float={float}
+        key={key}
+      ></ActionButton>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -47,20 +76,24 @@ export const NoteEditPopup = (props) => {
         <div className="modal">
           <ActionButton
             name="Zamknij"
-            position="right"
+            float="right"
             onClickHandler={closeModal}
           ></ActionButton>
-          <h2 className="modal__edit-title">{props.title}</h2>
-          <form>
+          <h2 className="modal__edit-title">{title}</h2>
+          <form className="modal__form">
             <ContentEditable
               innerRef={contentEditable}
-              onChange={handleNoteChange}
-              html={props.body}
+              onChange={handleNoteBodyChange}
+              html={body}
               className="content-editable"
             />
+            <FavCheckbox
+              isFav={fav}
+              handleChange={handleNoteFavChange}
+            ></FavCheckbox>
             <ActionButton
               name="Zapisz"
-              position="right"
+              float="right"
               onClickHandler={saveNoteChange}
             ></ActionButton>
           </form>

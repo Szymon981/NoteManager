@@ -1,14 +1,17 @@
 .board {
   margin-bottom: 5px;
 }
-.board__tags-filter {
-  margin-bottom: 20px;
-}
 .board__note-add-header {
   margin: 10px;
 }
 .board__notes-title {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.board__notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=Board.styles.css.map */

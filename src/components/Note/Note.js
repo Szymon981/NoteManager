@@ -1,29 +1,28 @@
 import "./Note.styles.css";
+import { deleteNote } from "../../consts/Consts";
 import { useCallback } from "react";
-import { deleteNote } from "../../api/ApiConnections";
 import { NoteEditPopup } from "../Popups/NoteEditPopup";
 import { ActionButton } from "../ActionButton/ActionButton";
+import { useDispatch } from "react-redux";
 
-export const Note = (props) => {
-  const notesSetter = useCallback(
-    (notes) => {
-      props.notesSetterProps(notes);
-    },
-    [props]
-  );
+export const Note = ({ title, body, id, fav }) => {
+  const dispatch = useDispatch();
 
   const handleDelete = useCallback(() => {
-    if (
-      window.confirm("Czy napewno chcesz usunąć notatkę: " + props.title + "?")
-    ) {
-      deleteNote(props.id, notesSetter);
+    if (window.confirm("Czy napewno chcesz usunąć notatkę: " + title + "?")) {
+      dispatch({ type: deleteNote, id: id });
     }
-  }, [props.id, props.title, notesSetter]);
+  }, [id, title, dispatch]);
 
   return (
-    <div className="note" key={props.id}>
-      <p className="note__title">{props.title}</p>
-      <NoteEditPopup {...props}></NoteEditPopup>
+    <div className="note" key={id}>
+      <p className="note__title">{title}</p>
+      <NoteEditPopup
+        title={title}
+        body={body}
+        fav={fav}
+        id={id}
+      ></NoteEditPopup>
       <ActionButton
         name="Usuń"
         color={"palevioletred"}

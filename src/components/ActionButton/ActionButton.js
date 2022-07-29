@@ -1,14 +1,28 @@
 import "./ActionButton.styles.css";
 
-export const ActionButton = (props) => {
+export const ActionButton = ({
+  color,
+  position,
+  name,
+  onClickHandler,
+  width,
+  height,
+  float,
+}) => {
   return (
     <div className="action-button">
       <button
         className="action-button__button"
-        style={{ backgroundColor: props.color, float: props.position }}
-        onClick={props.onClickHandler}
+        style={{
+          backgroundColor: color,
+          float: float,
+          width: width,
+          height: height,
+          position: position,
+        }}
+        onClick={onClickHandler}
       >
-        {props.name}
+        {name}
       </button>
     </div>
   );

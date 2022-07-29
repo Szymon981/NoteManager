@@ -1,0 +1,16 @@
+.search {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.search__input {
+  float: right;
+  display: inline-block;
+  font-family: "Century Gothic";
+  font-size: 20px;
+  width: 250px;
+}
+
+/*# sourceMappingURL=Search.styles.css.map */

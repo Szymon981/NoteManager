@@ -4,17 +4,14 @@ import "./index.css";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { combineReducers, createStore } from "@reduxjs/toolkit";
-import rootReducer from "./store/reducer";
-// import reducerA from "./store/reducerA";
-// import reducerB from "./store/reducerB";
+import { createStore, applyMiddleware } from "@reduxjs/toolkit";
+import rootReducer from "./store/apiReducer";
+import createSagaMiddleware from "redux-saga";
+import { watchNotesActions } from "./sagas/saga";
 
-// const rootReducer = combineReducers({
-//   rA: reducerA,
-//   rB: reducerB,
-// });
-
-const store = createStore(rootReducer);
+const sagaMiddleWare = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleWare));
+sagaMiddleWare.run(watchNotesActions);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,7 +22,4 @@ root.render(
   </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
